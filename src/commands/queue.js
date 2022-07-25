@@ -19,7 +19,7 @@ module.exports = {
             else if (player.loop === 'queue') loopString = '\n*Looping the whole queue*';
             finalEmbeds.push(new EmbedBuilder()
                 .setAuthor({ name: `Queue for ${interaction.guild.name}`, iconURL: interaction.guild.iconURL({ size: 4096 }) })
-                .setDescription(`**__Now playing:__**\n**${escapeMarkdown(player.queue.current.title())}** - **${escapeMarkdown(player.queue.current.author)}** [${currentDuration}] (${player.queue.current.requester.toString()})\n${client.util.formatTime(currentTime)} ${bar} ${currentDuration}\n\n**No tracks in queue.**${loopString}`)
+                .setDescription(`**__Now playing:__**\n**${escapeMarkdown(player.queue.current.title)}** - **${escapeMarkdown(player.queue.current.author)}** [${currentDuration}] (${player.queue.current.requester.toString()})\n${client.util.formatTime(currentTime)} ${bar} ${currentDuration}\n\n**No tracks in queue.**${loopString}`)
                 .setColor(client.config.color));
         } else {
             let chunked = _.chunk(player.queue, client.config.tracksPerPage);
