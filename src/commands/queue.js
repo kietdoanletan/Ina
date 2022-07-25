@@ -5,7 +5,7 @@ module.exports = {
         .setName('queue')
         .setDescription('Displays the current queue.'),
     permissions: [],
-    checks: ['IN_VC', 'SAME_VC', 'PLAYING',],
+    checks: ['PLAYING'],
     async run (client, interaction, player) {
         await interaction.deferReply();
         const currentDuration = client.util.formatTime(player.queue.current.length, player.queue.current.isStream);
