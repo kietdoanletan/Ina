@@ -17,6 +17,7 @@ module.exports = {
     async run (client, interaction, player) {
         let title = interaction.options.getString('query-title');
         let artist = interaction.options.getString('query-artist');
+        let customSearch = true;
         if ((title && !artist) || (!title && artist)) {
             const embed = new EmbedBuilder()
                 .setAuthor({ name: 'Error' })
@@ -36,6 +37,7 @@ module.exports = {
         if (!title && !artist && player.playing) {
             title = player.queue.current.title;
             artist = player.queue.current.author;
+            customSearch = false;
         }
 
         lyricsSearcher(artist, title)
@@ -44,7 +46,7 @@ module.exports = {
                 const pages = [];
                 for (const page of lyricPages) {
                     const embed = new EmbedBuilder()
-                        .setAuthor({ name: `Lyrics - ${title} by ${artist}` })
+                        .setAuthor({ name: `Lyrics ${customSearch ? ' search' : `- ${title} by ${artist}`}` })
                         .setDescription(page)
                         .setFooter(client.config.footer)
                         .setColor(client.config.color);
