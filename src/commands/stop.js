@@ -14,7 +14,6 @@ module.exports = {
         player.commandStop = true;
         player.queue.length = 0;
         player.setLoop('none');
-        // player.setVolume(client.config.defaultVolume);
         player.skip();
         interaction.reply({ embeds: [embed], fetchReply: true }).then(msg => {
             setTimeout(() => { msg.delete(); }, 10000);

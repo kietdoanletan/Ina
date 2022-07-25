@@ -21,7 +21,7 @@ module.exports = {
     checks: ['IN_VC', 'SAME_VC'],
     async run (client, interaction) {
         const query = interaction.options.getString('query');
-        const source = interaction.options.getString('source'); // || 'spotify';
+        const source = interaction.options.getString('source');
 
         await interaction.deferReply();
 
@@ -29,11 +29,8 @@ module.exports = {
             guildId: interaction.guild.id,
             textId: interaction.channel.id,
             voiceId: interaction.member.voice.channel.id,
-            deaf: true,
-            // mute: true
+            deaf: true
         });
-
-        // player.setVolume(client.config.defaultVolume); // preserves audio quality if unchanged
         
         if (!player.cleanup) player.cleanup = [];
 
@@ -53,9 +50,7 @@ module.exports = {
 
         if (!player.playing && !player.paused) player.play();
         const embed = new EmbedBuilder()
-            // .setAuthor({ name: 'Queued', iconURL: interaction.user.avatarURL({ size: 4096 }) })
             .setDescription(`${res.type === 'PLAYLIST' ? `Queued **${res.tracks.length} tracks** from **[${escapeMarkdown(res.playlistName)}](${query})**` : `Queued [**${escapeMarkdown(res.tracks[0].title)}** by **${escapeMarkdown(res.tracks[0].author)}**](${res.tracks[0].uri}).${player.queue.length > 0 ? `\nPosition in queue: **${player.queue.length}**` : ''}`} `)
-            // .setFooter(client.config.footer)
             .setColor(client.config.color);
         return interaction.editReply({ embeds: [embed], fetchReply: true }).then(x => player.cleanup.push(x));
     }
