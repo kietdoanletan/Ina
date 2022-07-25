@@ -5,7 +5,7 @@ module.exports = {
         .setDescription('Changes the loop mode of the player.')
         .addStringOption(option => option
             .setName('mode')
-            .setDescription('The new repeat mode of the player.')
+            .setDescription('The new loop mode of the player.')
             .addChoices(
                 { name: 'track (Loops the current track)', value: 'track' },
                 { name: 'queue (Loops the whole queue)', value: 'queue' },
