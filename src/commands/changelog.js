@@ -8,10 +8,13 @@ module.exports = {
     permissions: [],
     checks: [],
     async run (client, interaction) {
-        await interaction.reply('*Retrieving changelog...*');
+        await interaction.reply('*Fetching changelog...*');
         const content = await fetch(changelog).then(res => res.text());
         const parsed = content.split('<->');
-        const final = parsed.join('');
-        interaction.editReply(final);
+        const end = parsed.splice(-1, 1)[0];
+        const final = parsed.slice(0, 9);
+        final.push(end);
+        const msg = final.join('');
+        interaction.editReply(msg);
     }
 };
