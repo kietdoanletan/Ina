@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, escapeMarkdown } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('pause')
@@ -25,7 +25,7 @@ module.exports = {
         }
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Paused' })
-            .setDescription(`Paused **${player.queue.current.title}** by **${player.queue.current.author}**.`)
+            .setDescription(`Paused **${escapeMarkdown(player.queue.current.title)}** by **${escapeMarkdown(player.queue.current.author)}**.`)
             .setColor(client.config.color)
             .setFooter(client.config.footer);
         await player.pause(true);

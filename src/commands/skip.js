@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, escapeMarkdown } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('skip')
@@ -8,7 +8,7 @@ module.exports = {
     async run (client, interaction, player) {
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Skipped' })
-            .setDescription(`Skipped **${player.queue.current.title}** by **${player.queue.current.author}**.`)
+            .setDescription(`Skipped **${escapeMarkdown(player.queue.current.title)}** by **${escapeMarkdown(player.queue.current.author)}**.`)
             .setColor(client.config.color)
             .setFooter(client.config.footer);
         await player.skip();

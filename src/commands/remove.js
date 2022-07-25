@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, escapeMarkdown } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('remove')
@@ -14,7 +14,7 @@ module.exports = {
         const removedTrack = player.queue.splice(index, 1)[0];
         const embed = new EmbedBuilder()
             .setAuthor({ name: 'Removed' })
-            .setDescription(`Removed track **${index + 1}** (**${removedTrack.title}** by **${removedTrack.author}**) from the queue.`)
+            .setDescription(`Removed track **${index + 1}** (**${escapeMarkdown(removedTrack.title)}** by **${escapeMarkdown(removedTrack.author)}**) from the queue.`)
             .setColor(client.config.color)
             .setFooter(client.config.footer);
         interaction.reply({ embeds: [embed], fetchReply: true }).then(x => player.cleanup.push(x));

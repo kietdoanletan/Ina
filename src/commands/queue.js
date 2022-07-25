@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, escapeMarkdown } = require('discord.js');
 const _ = require('lodash');
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,7 +19,7 @@ module.exports = {
             else if (player.loop === 'queue') loopString = '\n*Looping the whole queue*';
             finalEmbeds.push(new EmbedBuilder()
                 .setAuthor({ name: `Queue for ${interaction.guild.name}`, iconURL: interaction.guild.iconURL({ size: 4096 }) })
-                .setDescription(`**__Now playing:__**\n**${player.queue.current.title}** - **${player.queue.current.author}** [${currentDuration}] (${player.queue.current.requester.toString()})\n${client.util.formatTime(currentTime)} ${bar} ${currentDuration}\n\n**No tracks in queue.**${loopString}`)
+                .setDescription(`**__Now playing:__**\n**${escapeMarkdown(player.queue.current.title())}** - **${escapeMarkdown(player.queue.current.author)}** [${currentDuration}] (${player.queue.current.requester.toString()})\n${client.util.formatTime(currentTime)} ${bar} ${currentDuration}\n\n**No tracks in queue.**${loopString}`)
                 .setColor(client.config.color));
         } else {
             let chunked = _.chunk(player.queue, client.config.tracksPerPage);
@@ -34,12 +34,12 @@ module.exports = {
             else if (player.loop === 'queue') loopString = '\n*Looping the whole queue*';
             for (let i = 0; i < chunked.length; i++) {
                 let msgArr = [];
-                msgArr.push(`**__Now playing:__**\n**${player.queue.current.title}** - **${player.queue.current.author}** [${currentDuration}] (${player.queue.current.requester.toString()})`);
+                msgArr.push(`**__Now playing:__**\n**${escapeMarkdown(player.queue.current.title)}** - **${escapeMarkdown(player.queue.current.author)}** [${currentDuration}] (${player.queue.current.requester.toString()})`);
                 msgArr.push(`${client.util.formatTime(currentTime)} ${bar} ${currentDuration}\n`);
                 for (let e = 0; e < chunked[i].length; e++) {
                     let track = chunked[i][e];
                     let trackDuration = client.util.formatTime(track.length, track.isStream);
-                    msgArr.push(`**\`${e + 10 * i + 1}\`**: **${track.title}** [${trackDuration}] (${track.requester.toString()})`);
+                    msgArr.push(`**\`${e + 10 * i + 1}\`**: **${escapeMarkdown(track.title)}** [${escapeMarkdown(trackDuration)}] (${track.requester.toString()})`);
                 }
                 msgArr.push(`\n**${player.queue.length}** tracks in queue.\n**Total duration:** \`${totalDuration}\`${loopString}`);
                 let text = msgArr.join('\n');
