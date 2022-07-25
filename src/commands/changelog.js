@@ -9,6 +9,8 @@ module.exports = {
     checks: [],
     async run (client, interaction) {
         const content = await fetch(changelog).then(res => res.text());
-        interaction.reply({ content: `\`\`\`\n${content}\`\`\`` });
+        const parsed = content.split('<->');
+        const final = parsed.join('');
+        interaction.reply(final);
     }
 };
