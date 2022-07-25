@@ -1,3 +1,4 @@
+const { ActivityType } = require('discord.js');
 module.exports = {
     token: '' || process.env.TOKEN,
     database_url: '' || process.env.KEYV,
@@ -29,8 +30,8 @@ module.exports = {
         status: 'idle', // The status of the bot. - online, idle, dnd, invisible
         activities: [
             {
-                name: 'music', // The name of the activity.
-                type: 'LISTENING', // The type of the activity.
+                name: 'music • inabot.tk • /', // The name of the activity.
+                type: ActivityType.PLAYING, // The type of the activity (ActivityType.[TYPE] - Playing, Competing, Listening, Watching, Streaming)
                 url: 'https://inabot.tk' // The URL of the activity (if applicable).
             }
         ]
