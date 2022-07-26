@@ -1,6 +1,8 @@
 # Ina
 A Discord music bot made with node.js, discord.js v14 and Lavalink, with many features (planned). Free to use for everyone and reliable, always giving you music in the highest quality possible.
 
+![Discord Bots](https://top.gg/api/widget/998515288117096559.svg)
+
 ### Features / Selling points:
 - **High quality:** Uses Lavalink without altering the stream from source initially.
 - **Multiple audio sources:** Supports YouTube, YouTube Music, Spotify, SoundCloud, BandCamp, Twitch, Vimeo and HTTP streams, maybe even Apple Music in the future!
@@ -17,4 +19,4 @@ A Discord music bot made with node.js, discord.js v14 and Lavalink, with many fe
 ### Links
 - [Invite URL](https://discord.com/api/oauth2/authorize?client_id=998515288117096559&permissions=412957928512&scope=bot%20applications.commands)
 - [Community / Support](https://discord.gg/8ZxsPYwgJ9)
-- [Discord Bot List](https://top.gg/bot/998515288117096559)
+- [Discord Bot List (top.gg)](https://top.gg/bot/998515288117096559)
