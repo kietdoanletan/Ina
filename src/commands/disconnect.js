@@ -22,6 +22,15 @@ module.exports = {
             .setFooter(client.config.footer);
         await player?.destroy();
         if (interaction.guild.members.cache.get(client.user.id).voice.channelId) interaction.guild.members.cache.get(client.user.id).voice.disconnect();
+        for (const msg of player.cleanup) {
+            if (msg.interaction && msg.interaction.replied) {
+                await msg.interaction.deleteReply().catch(() => null);
+            } else if (msg.replied && msg.replied == true) {
+                await msg.deleteReply().catch(() => null);
+            } else {
+                await msg.delete().catch(() => null);
+            }
+        }
         interaction.reply({ embeds: [embed], fetchReply: true }).then(msg => setTimeout(() => { msg.delete(); }, 10000));
     }
 };
